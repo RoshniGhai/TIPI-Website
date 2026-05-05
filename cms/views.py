@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.authtoken.models import Token
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.response import Response
@@ -79,10 +80,15 @@ def author_for_user(user):
     return author
 
 
+def cloudinary_is_configured():
+    config = cloudinary.config()
+    return bool(config.cloud_name and config.api_key and config.api_secret)
+
+
 def save_cms_data_url(data_url, folder='cms'):
     if not data_url or not isinstance(data_url, str) or ';base64,' not in data_url:
         return ''
-    if cloudinary.config().cloud_name:
+    if cloudinary_is_configured():
         upload = cloudinary.uploader.upload(
             data_url,
             folder=f'tipi/{folder}'.strip('/'),
@@ -90,6 +96,11 @@ def save_cms_data_url(data_url, folder='cms'):
             overwrite=False,
         )
         return upload.get('secure_url') or upload.get('url') or ''
+
+    if not settings.DEBUG:
+        raise ValidationError({
+            'media': 'Cloudinary is not configured on the backend. Add CLOUDINARY_URL or CLOUDINARY_CLOUD_NAME/API_KEY/API_SECRET before uploading CMS images.'
+        })
 
     header, encoded = data_url.split(';base64,', 1)
     mime_type = header.replace('data:', '')
@@ -313,6 +324,21 @@ class CmsMeView(APIView):
 
     def get(self, request):
         return Response(CmsUserSerializer(request.user).data)
+
+
+class CmsConfigView(APIView):
+    permission_classes = [IsAuthenticated, IsCmsUser]
+
+    def get(self, request):
+        config = cloudinary.config()
+        return Response(
+            {
+                'mediaStorage': 'cloudinary' if cloudinary_is_configured() else 'local',
+                'cloudinaryConfigured': cloudinary_is_configured(),
+                'cloudinaryCloudName': config.cloud_name or '',
+                'productionUploadReady': settings.DEBUG or cloudinary_is_configured(),
+            }
+        )
 
 
 class CmsDashboardView(APIView):
