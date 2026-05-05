@@ -1,5 +1,7 @@
 # India Prosperity CMS Backend
 
+This folder is deployable independently from the React/Vite frontend.
+
 ## Setup
 
 ```bash
@@ -7,6 +9,7 @@ cd backend
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
+copy .env.example .env
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py seed_dummy_content
@@ -50,7 +53,25 @@ Recommended GUI: TablePlus for quick table browsing and editing, or DataGrip for
 Set the frontend API URL:
 
 ```bash
+cd ..\frontend
 VITE_API_BASE_URL=http://127.0.0.1:8000/api/v1
+```
+
+## Production deployment
+
+Use `backend` as the deployment root.
+
+Start command:
+
+```bash
+gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+```
+
+Required environment variables are listed in `backend/.env.example`.
+After the first deployment, run:
+
+```bash
+python manage.py migrate
 ```
 
 ## API

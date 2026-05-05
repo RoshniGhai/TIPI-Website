@@ -5,12 +5,15 @@
 
 # Frontend dependencies/build output
 node_modules/
+frontend/node_modules/
 dist/
+frontend/dist/
 
 # Local backend/runtime artifacts
 backend/mysql-data/
 backend/media/
 backend/*.log
+backend/.venv/
 backend/__pycache__/
 backend/**/__pycache__/
 *.pyc
