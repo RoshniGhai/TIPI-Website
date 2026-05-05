@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import {
   clearCmsToken,
+  cmsConfig,
   cmsDashboard,
   cmsEvents,
   cmsInsights,
@@ -391,11 +392,19 @@ function ContentTable({ title, items, type, user, refresh }) {
 function CreateContent({ user, lookups, refresh, setActiveView }) {
   const [kind, setKind] = useState('insight');
   const [status, setStatus] = useState('idle');
+  const [mediaConfig, setMediaConfig] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [eventSchedules, setEventSchedules] = useState([{ id: 1 }]);
   const [eventSpeakers, setEventSpeakers] = useState([{ id: 1 }]);
   const firstCategory = lookups.categories?.[0]?.id || '';
+
+  useEffect(() => {
+    cmsConfig()
+      .then(setMediaConfig)
+      .catch(() => setMediaConfig(null));
+  }, []);
 
   const getBase64 = (file) => new Promise((resolve) => {
     if (!file || file.size === 0) return resolve('');
@@ -419,6 +428,7 @@ function CreateContent({ user, lookups, refresh, setActiveView }) {
   async function save(formElement, action) {
     const form = new FormData(formElement);
     setStatus('loading');
+    setErrorMessage('');
     
     try {
       const imageBase64 = await getBase64(form.get('image'));
@@ -426,6 +436,10 @@ function CreateContent({ user, lookups, refresh, setActiveView }) {
 
       const extraImagesFiles = form.getAll('extra_images');
       const extraImagesBase64 = await Promise.all(extraImagesFiles.map(getBase64));
+      const hasUploadedMedia = Boolean(imageBase64 || mediaBase64 || extraImagesBase64.some(Boolean));
+      if (hasUploadedMedia && mediaConfig?.productionUploadReady === false) {
+        throw new Error('Cloudinary is not configured on the backend. Add Cloudinary env variables in Railway, redeploy, then upload images.');
+      }
 
       if (kind === 'insight') {
         await createCmsInsight({
@@ -501,7 +515,8 @@ function CreateContent({ user, lookups, refresh, setActiveView }) {
       await refresh();
       setStatus('success');
       setActiveView(kind === 'insight' ? 'content' : 'events');
-    } catch {
+    } catch (error) {
+      setErrorMessage(error?.message || '');
       setStatus('error');
     }
   }
@@ -746,7 +761,14 @@ function CreateContent({ user, lookups, refresh, setActiveView }) {
           <button type="submit">{authorSubmitLabel}</button>
           <button type="button" onClick={(event) => save(event.currentTarget.form, 'draft')}>Save Draft</button>
         </div>
-        {status === 'error' ? <p className={styles.errorText}>Unable to save content. Check required fields.</p> : null}
+        {mediaConfig?.productionUploadReady === false ? (
+          <p className={styles.errorText}>
+            Cloudinary is not configured on the backend. Uploaded images will not appear on the live website until Railway has Cloudinary env variables.
+          </p>
+        ) : null}
+        {status === 'error' ? (
+          <p className={styles.errorText}>{errorMessage || 'Unable to save content. Check required fields.'}</p>
+        ) : null}
       </form>
     </section>
   );

@@ -42,6 +42,7 @@ export async function cmsLogin(payload) {
 }
 
 export const cmsMe = () => cmsRequest('/cms/me/');
+export const cmsConfig = () => cmsRequest('/cms/config/');
 export const cmsDashboard = () => cmsRequest('/cms/dashboard/');
 export const cmsLookups = () => cmsRequest('/cms/lookups/');
 export const cmsInsights = () => cmsRequest('/cms/insights/');
