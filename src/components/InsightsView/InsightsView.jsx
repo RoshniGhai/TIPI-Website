@@ -40,11 +40,6 @@ function getInsightExcerpt(insight) {
   return insight.excerpt || insight.content || '';
 }
 
-function useFallbackImage(event, fallback) {
-  if (event.currentTarget.src.endsWith(fallback)) return;
-  event.currentTarget.src = fallback;
-}
-
 function parseDisplayDate(value) {
   if (!value) return 0;
 
@@ -76,11 +71,7 @@ function TrendingCard({ insight, index, onSelect }) {
       tabIndex={0}
     >
       <div className={styles.imageWrap}>
-        <img
-          src={insight.image || '/figma-assets/detail-similar-1.png'}
-          alt=""
-          onError={(event) => useFallbackImage(event, '/figma-assets/detail-similar-1.png')}
-        />
+        <img src={insight.image || '/figma-assets/detail-similar-1.png'} alt="" />
       </div>
       <div className={styles.trendingCopy}>
         <h2>{insight.title}</h2>
@@ -116,11 +107,7 @@ function AllInsightCard({ insight, index, onSelect }) {
       tabIndex={0}
     >
       <div className={styles.allImageWrap}>
-        <img
-          src={insight.image || '/figma-assets/detail-similar-1.png'}
-          alt=""
-          onError={(event) => useFallbackImage(event, '/figma-assets/detail-similar-1.png')}
-        />
+        <img src={insight.image || '/figma-assets/detail-similar-1.png'} alt="" />
       </div>
       <div className={styles.allCopy}>
         <h3>{insight.title}</h3>
