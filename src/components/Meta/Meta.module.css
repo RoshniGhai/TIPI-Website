@@ -1,0 +1,44 @@
+.meta {
+  align-items: center;
+  color: #444444;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  font-weight: 500;
+  gap: 24px;
+  line-height: 24px;
+}
+
+.meta span {
+  align-items: center;
+  display: inline-flex;
+  gap: 5px;
+}
+
+.meta svg {
+  color: #003259;
+  height: 24px;
+  width: 24px;
+}
+
+.meta strong {
+  color: #0c6490;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.compact {
+  gap: 16px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.compact strong {
+  margin-left: 0;
+}
+
+.compact svg {
+  height: 14px;
+  width: 14px;
+}

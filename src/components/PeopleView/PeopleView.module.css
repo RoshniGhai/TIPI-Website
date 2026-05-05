@@ -1,0 +1,375 @@
+.page {
+  animation: pageEnter 260ms ease both;
+  background: #fdfdfd;
+  margin: 0 auto 120px;
+  max-width: var(--content-width);
+  padding-top: 32px;
+  width: min(var(--content-width), calc(100% - 128px));
+}
+
+.breadcrumb {
+  align-items: center;
+  color: #00446d;
+  display: flex;
+  font-size: 14px;
+  gap: 15px;
+  line-height: 22px;
+  margin-bottom: 42px;
+}
+
+.breadcrumb strong {
+  color: #666666;
+  font-weight: 400;
+}
+
+.hero {
+  animation: cardEnter 280ms ease both;
+  border-radius: 8px;
+  height: 360px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.heroShade {
+  background: linear-gradient(0deg, #00436b 0%, rgba(0, 67, 107, 0) 100%);
+  inset: 0;
+  position: absolute;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 64px;
+  font-weight: 500;
+  left: 50%;
+  line-height: 76px;
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  top: 252px;
+  transform: translateX(-50%);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  margin-top: 64px;
+}
+
+.personCard {
+  align-items: start;
+  animation: cardEnter 280ms ease both;
+  animation-delay: var(--enter-delay);
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 320px minmax(0, 1fr);
+  padding: 16px;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.personCard:hover,
+.personCard:focus-within {
+  border-color: #cae9ff;
+  box-shadow: 0 18px 36px rgba(0, 50, 89, 0.09);
+  transform: translateY(-3px);
+}
+
+.personCard:focus-visible {
+  box-shadow: 0 0 0 3px rgba(12, 100, 144, 0.22);
+  outline: none;
+}
+
+.avatar {
+  border-radius: 8px;
+  height: 244px;
+  object-fit: cover;
+  transition: transform 220ms ease;
+  width: 320px;
+}
+
+.personCard:hover .avatar,
+.personCard:focus-visible .avatar {
+  transform: scale(1.04);
+}
+
+.personContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.personHeader {
+  border-bottom: 1px solid #c6c6c6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.role {
+  color: #444444;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0;
+}
+
+.nameRow {
+  align-items: flex-end;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.nameRow h2 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  margin: 0;
+}
+
+.email {
+  align-items: center;
+  color: #4f4f4f;
+  display: inline-flex;
+  font-size: 18px;
+  gap: 8px;
+  line-height: 28px;
+  transition: color 180ms ease;
+}
+
+.email img {
+  height: 24px;
+  width: 24px;
+}
+
+.email:hover,
+.email:focus-visible {
+  color: #0c6490;
+  outline: none;
+}
+
+.socials {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.socials a {
+  align-items: center;
+  color: #006fbd;
+  display: inline-flex;
+  height: 28px;
+  justify-content: center;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+  width: 28px;
+}
+
+.socials a:hover,
+.socials a:focus-visible {
+  color: #003259;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.bio {
+  color: #4f4f4f;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 8px;
+  line-height: 22px;
+  max-height: 98px;
+  overflow: hidden;
+  padding-top: 8px;
+  position: relative;
+  transition: max-height 220ms ease;
+}
+
+.bio p {
+  margin: 0;
+}
+
+.bio:not(.bioExpanded)::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), #ffffff 80%);
+  bottom: 0;
+  content: '';
+  height: 34px;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.bioExpanded {
+  max-height: 260px;
+}
+
+.readMore {
+  align-self: flex-start;
+  background: #ffffff;
+  color: #0c6490;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+  padding: 0;
+  position: relative;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+  z-index: 1;
+}
+
+.readMore:hover,
+.readMore:focus-visible {
+  color: #003259;
+  outline: none;
+  transform: translateX(2px);
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 72px;
+}
+
+.pagination button,
+.pagination span {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 8px;
+  color: #444444;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 600;
+  height: 32px;
+  justify-content: center;
+  min-width: 32px;
+  padding: 0 10px;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.pagination span {
+  border-color: transparent;
+}
+
+.pagination button:hover,
+.pagination button:focus-visible {
+  background: #eef8ff;
+  color: #003259;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.currentPage {
+  background: #003259 !important;
+  color: #ffffff !important;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1040px) {
+  .page {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+  }
+
+  .personCard {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+
+  .avatar {
+    width: 260px;
+  }
+
+  .nameRow {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    margin-bottom: 88px;
+    padding-top: 24px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 28px;
+  }
+
+  .hero {
+    height: 260px;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+    line-height: 56px;
+    top: 174px;
+  }
+
+  .list {
+    gap: 32px;
+    margin-top: 42px;
+  }
+
+  .personCard {
+    grid-template-columns: 1fr;
+  }
+
+  .avatar {
+    height: auto;
+    width: 100%;
+  }
+
+  .email {
+    font-size: 15px;
+    line-height: 22px;
+    overflow-wrap: anywhere;
+  }
+}

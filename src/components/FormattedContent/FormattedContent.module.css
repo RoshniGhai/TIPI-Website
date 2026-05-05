@@ -1,0 +1,86 @@
+.content {
+  color: #444444;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.content > *:first-child {
+  margin-top: 0;
+}
+
+.content > *:last-child {
+  margin-bottom: 0;
+}
+
+.content p,
+.content ul,
+.content ol,
+.empty {
+  margin: 0 0 16px;
+}
+
+.content h2,
+.content h3,
+.content h4 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  margin: 28px 0 12px;
+}
+
+.content h2 {
+  font-size: 32px;
+  line-height: 42px;
+}
+
+.content h3 {
+  font-size: 26px;
+  line-height: 34px;
+}
+
+.content h4 {
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.content ul,
+.content ol {
+  padding-left: 24px;
+}
+
+.content li {
+  margin: 0 0 8px;
+}
+
+.content strong {
+  color: #202124;
+  font-weight: 700;
+}
+
+.content em {
+  color: #333333;
+}
+
+.content a {
+  color: #0c6490;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.content blockquote {
+  background: #d8f0ff;
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-style: italic;
+  line-height: 36px;
+  margin: 24px 0;
+  padding: 18px 28px;
+}
+
+.empty {
+  color: #666666;
+  font-size: 16px;
+  line-height: 24px;
+}

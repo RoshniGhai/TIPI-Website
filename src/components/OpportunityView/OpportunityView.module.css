@@ -1,0 +1,404 @@
+.page {
+  background: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0 auto 120px;
+  max-width: var(--content-width);
+  padding-top: 32px;
+  width: min(var(--content-width), calc(100% - 128px));
+}
+
+.breadcrumb {
+  align-items: center;
+  color: #00446d;
+  display: flex;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  gap: 15px;
+  line-height: 22px;
+}
+
+.breadcrumb strong {
+  color: #444444;
+  font-weight: 400;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.article h1,
+.section h2 {
+  color: #00446d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 64px;
+  margin: 0;
+}
+
+.heroImage {
+  border-radius: 4px;
+  height: 464px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.kicker {
+  color: #181818;
+  font-size: 14px;
+  line-height: 24px;
+  margin: -8px 0 0;
+}
+
+.articleCopy {
+  color: #444444;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.articleCopy p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.articleCopy h2 {
+  color: #181818;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  margin: 0 0 -16px;
+}
+
+.readMoreButton {
+  align-items: center;
+  background: transparent;
+  color: #0c6490;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 8px;
+  line-height: 28px;
+  padding: 0;
+  width: fit-content;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.filters {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.filters > span {
+  color: #181818;
+  font-size: 18px;
+  line-height: 28px;
+  margin-right: 4px;
+}
+
+.filter {
+  align-items: center;
+  background: #f4f4f4;
+  border-radius: 8px;
+  color: #333333;
+  display: inline-flex;
+  font-size: 16px;
+  gap: 12px;
+  height: 36px;
+  padding: 8px 8px 8px 12px;
+}
+
+.primaryFilter {
+  background: #f0f9ff;
+}
+
+.applyFilter {
+  background: #ffffff;
+  border: 1px solid #003259;
+  border-radius: 8px;
+  color: #003259;
+  font-size: 16px;
+  height: 36px;
+  margin-left: 8px;
+  padding: 8px 48px;
+}
+
+.featuredInsight {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 643px minmax(0, 1fr);
+}
+
+.featuredInsight img {
+  border-radius: 8px;
+  height: 270px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.featuredInsight h3,
+.insightCard h3,
+.eventCopy h3,
+.personCard h3 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+  margin: 0;
+}
+
+.featuredInsight p,
+.insightCard p,
+.eventCopy p {
+  color: #4f4f4f;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 8px 0;
+}
+
+.meta {
+  align-items: center;
+  color: #444444;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  font-weight: 500;
+  gap: 18px;
+  line-height: 24px;
+}
+
+.meta span {
+  align-items: center;
+  display: inline-flex;
+  gap: 5px;
+}
+
+.meta svg {
+  color: #00446d;
+}
+
+.meta strong {
+  color: #0c6490;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.insightGrid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 32px;
+}
+
+.insightCard img {
+  border-radius: 4px;
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.insightCard h3 {
+  font-size: 24px;
+  line-height: 36px;
+  margin-top: 8px;
+}
+
+.tags {
+  display: flex;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.tags span {
+  border: 0.5px solid #0c6490;
+  border-radius: 16px;
+  color: #0c6490;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 2px 16px;
+}
+
+.eventsBand {
+  background: #eaf3ff;
+  margin-left: calc((100vw - min(var(--content-width), calc(100vw - 128px))) / -2);
+  margin-right: calc((100vw - min(var(--content-width), calc(100vw - 128px))) / -2);
+  margin-bottom: 48px;
+  padding: 24px 0;
+}
+
+.bandInner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+  max-width: var(--content-width);
+  width: min(var(--content-width), calc(100% - 128px));
+}
+
+.eventFeature {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 643px minmax(0, 1fr);
+}
+
+.eventFeature img {
+  border-radius: 8px;
+  height: 270px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.eventCopy {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eventCopy a {
+  background: #003259;
+  border-radius: 8px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 16px;
+  justify-content: center;
+  line-height: 24px;
+  padding: 8px 72px;
+}
+
+.pagination {
+  align-items: center;
+  color: #00446d;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
+.pagination span,
+.pagination i {
+  background: #61c3ff;
+  border-radius: 999px;
+  display: block;
+  height: 8px;
+  width: 8px;
+}
+
+.pagination span {
+  background: #0c6490;
+  width: 24px;
+}
+
+.peopleWrap {
+  align-items: center;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
+}
+
+.peopleArrow {
+  color: #00446d;
+}
+
+.peopleGrid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.personCard img {
+  border-radius: 4px;
+  height: 180px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.personCard h3 {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  margin-top: 8px;
+}
+
+.personCard p {
+  color: #444444;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0 0 16px;
+}
+
+@media (max-width: 1040px) {
+  .page,
+  .bandInner {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .eventsBand {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .featuredInsight,
+  .eventFeature {
+    grid-template-columns: 1fr;
+  }
+
+  .peopleGrid,
+  .insightGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    gap: 56px;
+    margin-bottom: 76px;
+    padding-top: 24px;
+  }
+
+  .article h1,
+  .section h2 {
+    font-size: 38px;
+    line-height: 48px;
+  }
+
+  .heroImage {
+    height: 260px;
+  }
+
+  .insightGrid,
+  .peopleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .peopleWrap {
+    grid-template-columns: 1fr;
+  }
+
+  .peopleArrow {
+    display: none;
+  }
+}

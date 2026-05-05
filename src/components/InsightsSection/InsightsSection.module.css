@@ -1,0 +1,146 @@
+.section {
+  margin: 0 auto 120px;
+  max-width: var(--content-width);
+  padding: 0;
+  width: min(var(--content-width), calc(100% - 128px));
+}
+
+.featured {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 643px minmax(0, 1fr);
+  margin-bottom: 48px;
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.featured img,
+.card img {
+  aspect-ratio: 16 / 9;
+  background: #eef7fc;
+  border-radius: var(--radius);
+  height: 270px;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.featured,
+.card {
+  cursor: pointer;
+}
+
+.featured:hover,
+.featured:focus-visible,
+.card:hover,
+.card:focus-visible {
+  outline: none;
+  transform: scale(1.01);
+}
+
+.featured:focus-visible,
+.card:focus-visible {
+  box-shadow: 0 0 0 3px rgba(12, 100, 144, 0.16);
+}
+
+.featuredCopy h3,
+.card h3 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  line-height: 48px;
+  margin: 0;
+}
+
+.featuredCopy h3 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.featuredCopy p,
+.card p {
+  color: #4f4f4f;
+  display: -webkit-box;
+  font-size: 16px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 24px;
+  overflow: hidden;
+}
+
+.featuredCopy p {
+  margin: 16px 0 8px;
+}
+
+.grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card img {
+  border-radius: 4px;
+  height: 220px;
+  margin-bottom: 8px;
+}
+
+.card {
+  border-radius: 4px;
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.card h3 {
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.tags span {
+  border: 0.5px solid #0c6490;
+  border-radius: 16px;
+  color: #0c6490;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 2px 16px;
+}
+
+.card p {
+  margin: 8px 0;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  .featured,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    gap: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .section {
+    margin-bottom: 76px;
+    padding: 0 14px;
+  }
+
+  .featuredCopy h3 {
+    font-size: 28px;
+  }
+}

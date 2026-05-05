@@ -1,0 +1,130 @@
+.hero {
+  margin: 24px auto 120px;
+  max-width: var(--content-width);
+  padding: 0;
+  width: min(var(--content-width), calc(100% - 128px));
+}
+
+.imageWrap {
+  height: 559px;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.imageWrap img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 0 24px;
+}
+
+.titleRow,
+.summaryRow {
+  align-items: flex-end;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.summaryRow {
+  align-items: center;
+}
+
+.titleRow h1 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 48px;
+  margin: 0;
+}
+
+.summaryRow p {
+  color: #4f4f4f;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  max-width: 657px;
+}
+
+.titleRow > :last-child,
+.summaryRow > :last-child {
+  justify-self: end;
+}
+
+.titleRow > :last-child {
+  gap: 24px;
+}
+
+.titleRow > :last-child strong {
+  min-width: 140px;
+  text-align: right;
+}
+
+.summaryRow > :last-child {
+  justify-items: end;
+}
+
+.dots {
+  background: #ffffff;
+  border-radius: 999px;
+  display: flex;
+  gap: 15.586px;
+  justify-content: center;
+  padding: 15.586px;
+}
+
+.dots button {
+  background: #dcdcdc;
+  border-radius: 999px;
+  height: 15.586px;
+  transition: width 180ms ease, background 180ms ease;
+  width: 15.586px;
+}
+
+.dots .activeDot {
+  background: #003259;
+  width: 46.759px;
+}
+
+@media (max-width: 820px) {
+  .hero {
+    margin-bottom: 72px;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  .titleRow,
+  .summaryRow {
+    grid-template-columns: 1fr;
+  }
+
+  .titleRow > :last-child,
+  .summaryRow > :last-child {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    margin-top: 14px;
+    padding: 0 14px;
+  }
+
+  .imageWrap {
+    height: auto;
+    aspect-ratio: 1.4 / 1;
+  }
+
+  .titleRow h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}

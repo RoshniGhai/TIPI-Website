@@ -1,0 +1,12 @@
+.page {
+  background: #ffffff;
+}
+
+.state {
+  align-items: center;
+  color: #174b76;
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+  min-height: 100vh;
+}
