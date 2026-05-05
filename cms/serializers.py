@@ -1,5 +1,4 @@
 import bleach
-from django.conf import settings
 from rest_framework import serializers
 from django.contrib.auth.models import Group, User
 
@@ -21,29 +20,11 @@ from .models import (
 )
 
 
-def is_local_media_url(value):
-    if not value:
-        return False
-    return value.startswith('/media/') or '/media/cms/' in value
-
-
 def media_url(obj, request=None):
-    if not obj:
-        return ''
     value = obj.thumbnail_url or obj.media_url
-    if is_local_media_url(value) and not settings.DEBUG:
-        return ''
     if request and value and value.startswith('/media/'):
         return request.build_absolute_uri(value)
     return value
-
-
-def first_public_media(media_queryset, request=None):
-    for item in media_queryset.all():
-        value = media_url(item, request)
-        if value:
-            return value
-    return ''
 
 
 class BannerSerializer(serializers.ModelSerializer):
@@ -134,10 +115,8 @@ class InsightSerializer(serializers.ModelSerializer):
         return bleach.clean(obj.content, tags=[], strip=True)[:180]
 
     def get_image(self, obj):
-        request = self.context.get('request')
-        primary = obj.media.filter(is_primary=True).first()
-        primary_url = media_url(primary, request)
-        return primary_url or first_public_media(obj.media, request)
+        primary = obj.media.filter(is_primary=True).first() or obj.media.first()
+        return media_url(primary, self.context.get('request')) if primary else ''
 
     def get_href(self, obj):
         return f'/insights/{obj.slug}'
@@ -188,8 +167,6 @@ class EventSpeakerSerializer(serializers.ModelSerializer):
 
     def get_speaker_image(self, obj):
         value = obj.speaker.image_url
-        if is_local_media_url(value) and not settings.DEBUG:
-            return ''
         request = self.context.get('request')
         if request and value and value.startswith('/media/'):
             return request.build_absolute_uri(value)
@@ -239,10 +216,8 @@ class EventSerializer(serializers.ModelSerializer):
         ).data
 
     def get_image(self, obj):
-        request = self.context.get('request')
-        primary = obj.media.filter(is_primary=True).first()
-        primary_url = media_url(primary, request)
-        return primary_url or first_public_media(obj.media, request)
+        primary = obj.media.filter(is_primary=True).first() or obj.media.first()
+        return media_url(primary, self.context.get('request')) if primary else ''
 
     def get_href(self, obj):
         return f'/events/{obj.slug}'
