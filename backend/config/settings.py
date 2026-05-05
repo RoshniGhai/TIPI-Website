@@ -14,6 +14,9 @@ def env_list(name, default):
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-only-secret-key')
 DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
 ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1')
+railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+if railway_domain and railway_domain not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(railway_domain)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -98,6 +101,15 @@ CORS_ALLOWED_ORIGINS = env_list(
     'CORS_ALLOWED_ORIGINS',
     'http://localhost:5173,http://127.0.0.1:5173',
 )
+if railway_domain:
+    railway_origin = f'https://{railway_domain}'
+    if railway_origin not in CORS_ALLOWED_ORIGINS:
+        CORS_ALLOWED_ORIGINS.append(railway_origin)
+
+CSRF_TRUSTED_ORIGINS = env_list('CSRF_TRUSTED_ORIGINS', '')
+for origin in CORS_ALLOWED_ORIGINS:
+    if origin.startswith('https://') and origin not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(origin)
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer'],
