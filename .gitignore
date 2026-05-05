@@ -1,1 +1,31 @@
-dist/*
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+
+# Frontend dependencies/build output
+node_modules/
+dist/
+
+# Local backend/runtime artifacts
+backend/mysql-data/
+backend/media/
+backend/*.log
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
+
+# Local logs
+*.log
+vite-*.log
+
+# Local QA screenshots
+*-qa*.png
+homepage-*.png
+about-view-qa.png
+contact-view-qa.png
+opportunity-view-qa*.png
+people-view*.png
+person-detail-qa.png
+subscribe-modal-qa*.png
+verticals-menu-qa*.png
