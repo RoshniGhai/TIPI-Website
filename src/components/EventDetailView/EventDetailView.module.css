@@ -1,0 +1,525 @@
+.page {
+  animation: detailEnter 260ms ease both;
+  background: #ffffff;
+  color: #202124;
+  margin: 0 auto 120px;
+  max-width: 1440px;
+  padding: 32px 64px 0;
+}
+
+.breadcrumb {
+  align-items: center;
+  color: #00446d;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 13px;
+  line-height: 22px;
+  margin: 0 auto 32px;
+  max-width: var(--content-width);
+}
+
+.breadcrumb button {
+  background: transparent;
+  color: #00446d;
+  font-size: inherit;
+  padding: 0;
+  transition: color 180ms ease;
+}
+
+.breadcrumb button:hover,
+.breadcrumb button:focus-visible {
+  color: #0c6490;
+  outline: none;
+}
+
+.breadcrumb strong {
+  color: #666666;
+  font-weight: 400;
+}
+
+.hero {
+  align-items: stretch;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  margin: 0 auto 96px;
+  max-width: var(--content-width);
+}
+
+.heroCopy {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.badge {
+  align-self: flex-start;
+  background: #d8f0ff;
+  border-radius: 999px;
+  color: #00446d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  padding: 10px 24px;
+}
+
+.hero h1,
+.contentBlock h2,
+.sectionIntro h2,
+.registration h2 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: 56px;
+  line-height: 70px;
+  max-width: 610px;
+}
+
+.metaGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 560px;
+}
+
+.metaItem {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.metaItem svg {
+  color: #0c6490;
+  flex: 0 0 auto;
+}
+
+.metaItem span {
+  color: #666666;
+  display: block;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.metaItem strong {
+  color: #003259;
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.actions button,
+.form button {
+  border: 1px solid #003259;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 52px;
+  padding: 12px 28px;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.actions button:first-child,
+.form button {
+  background: #003259;
+  color: #ffffff;
+}
+
+.actions button:last-child {
+  background: #ffffff;
+  color: #003259;
+}
+
+.actions button:hover,
+.actions button:focus-visible,
+.form button:hover,
+.form button:focus-visible {
+  background: #0c6490;
+  border-color: #0c6490;
+  box-shadow: 0 12px 24px rgba(0, 50, 89, 0.16);
+  color: #ffffff;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.heroImage {
+  border-radius: 4px;
+  height: 520px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.contentBlock,
+.speakers,
+.schedule,
+.registration {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--content-width);
+}
+
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1048px;
+  text-align: center;
+}
+
+.contentBlock h2,
+.sectionIntro h2,
+.registration h2 {
+  font-size: 40px;
+  line-height: 52px;
+  position: relative;
+}
+
+.contentBlock h2::after,
+.sectionIntro h2::after {
+  background: #0c6490;
+  border-radius: 999px;
+  content: "";
+  display: block;
+  height: 3px;
+  margin: 16px auto 0;
+  width: 72px;
+}
+
+.contentBlock p,
+.registration p {
+  color: #4f4f4f;
+  font-size: 18px;
+  line-height: 32px;
+  margin: 0;
+}
+
+.contentBlock blockquote {
+  background: #d8f0ff;
+  border-left: 5px solid #0c6490;
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-style: italic;
+  line-height: 42px;
+  margin: 8px 0;
+  padding: 32px 56px;
+  text-align: left;
+}
+
+.speakers,
+.schedule {
+  margin-top: 96px;
+}
+
+.sectionIntro {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.sectionIntro p {
+  color: #666666;
+  font-size: 18px;
+  line-height: 28px;
+  margin: 14px 0 0;
+}
+
+.speakerGrid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.speakerCard {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 14px 36px rgba(0, 50, 89, 0.08);
+  overflow: hidden;
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.speakerCard:hover {
+  box-shadow: 0 18px 42px rgba(0, 50, 89, 0.14);
+  transform: translateY(-4px);
+}
+
+.speakerCard img {
+  filter: grayscale(1);
+  height: 300px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.speakerCard div {
+  padding: 22px 20px 24px;
+  text-align: center;
+}
+
+.speakerCard h3 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 0 0 8px;
+}
+
+.speakerCard p {
+  color: #4f4f4f;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 8px;
+}
+
+.speakerCard span {
+  color: #0c6490;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.scheduleList {
+  border-top: 1px solid #d9d9d9;
+}
+
+.scheduleItem {
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 150px minmax(0, 1fr) 160px;
+  padding: 28px 0;
+}
+
+.scheduleItem time {
+  color: #0c6490;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.scheduleItem h3 {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 34px;
+  margin: 0 0 6px;
+}
+
+.scheduleItem p,
+.scheduleItem span {
+  color: #4f4f4f;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.scheduleItem span {
+  color: #0c6490;
+  font-weight: 500;
+  text-align: right;
+}
+
+.registration {
+  background: #f5fbff;
+  border-radius: 4px;
+  margin-top: 96px;
+  padding: 48px;
+  text-align: center;
+}
+
+.registration p {
+  margin-top: 10px;
+}
+
+.form {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 36px auto 0;
+  max-width: 860px;
+}
+
+.form input,
+.form select {
+  appearance: none;
+  background: #ffffff;
+  border: 1px solid #cddce6;
+  border-radius: 4px;
+  color: #333333;
+  font: inherit;
+  min-height: 52px;
+  padding: 13px 16px;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+  width: 100%;
+}
+
+.form input:focus,
+.form select:focus {
+  border-color: #0c6490;
+  box-shadow: 0 0 0 3px rgba(12, 100, 144, 0.14);
+  outline: none;
+}
+
+.selectWrap {
+  grid-column: 1 / -1;
+  position: relative;
+}
+
+.selectWrap span {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.selectWrap svg {
+  color: #0c6490;
+  pointer-events: none;
+  position: absolute;
+  right: 16px;
+  top: 17px;
+}
+
+.form button {
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-width: 220px;
+}
+
+.form button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+  transform: none;
+}
+
+.formStatus,
+.formStatusError {
+  grid-column: 1 / -1;
+  font-size: 15px;
+  line-height: 22px;
+  margin: -6px 0 0;
+  text-align: center;
+}
+
+.formStatus {
+  color: #0c6490;
+}
+
+.formStatusError {
+  color: #b3261e;
+}
+
+@keyframes detailEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .page {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroImage {
+    height: 440px;
+  }
+
+  .speakerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    margin-bottom: 80px;
+    padding: 24px 16px 0;
+  }
+
+  .hero {
+    gap: 32px;
+    margin-bottom: 72px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    line-height: 52px;
+  }
+
+  .metaGrid,
+  .form,
+  .scheduleItem {
+    grid-template-columns: 1fr;
+  }
+
+  .heroImage {
+    height: 310px;
+  }
+
+  .contentBlock h2,
+  .sectionIntro h2,
+  .registration h2 {
+    font-size: 34px;
+    line-height: 44px;
+  }
+
+  .contentBlock p,
+  .registration p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .contentBlock blockquote {
+    font-size: 22px;
+    line-height: 34px;
+    padding: 24px;
+  }
+
+  .speakerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .scheduleItem span {
+    text-align: left;
+  }
+
+  .registration {
+    padding: 32px 18px;
+  }
+}

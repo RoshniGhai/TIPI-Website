@@ -1,0 +1,90 @@
+.logo {
+  align-items: center;
+  display: inline-flex;
+  gap: 10px;
+  min-width: 118px;
+}
+
+.image {
+  height: 48px;
+  object-fit: contain;
+  width: 118px;
+}
+
+.mark {
+  background: linear-gradient(160deg, #1b8bc9 0%, #77c8ec 48%, #0d4b84 100%);
+  border-radius: 50% 50% 48% 48%;
+  display: grid;
+  height: 38px;
+  place-items: center;
+  position: relative;
+  width: 27px;
+}
+
+.mark::before,
+.mark::after {
+  background: #ffffff;
+  content: "";
+  height: 30px;
+  opacity: 0.9;
+  position: absolute;
+  top: 4px;
+  width: 5px;
+}
+
+.mark::before {
+  left: 7px;
+  transform: skewY(-28deg);
+}
+
+.mark::after {
+  right: 7px;
+  transform: skewY(28deg);
+}
+
+.mark span {
+  background: #0a65a3;
+  border-radius: 50%;
+  height: 5px;
+  position: absolute;
+  top: -4px;
+  width: 5px;
+}
+
+.text {
+  color: #174b76;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 0.95;
+  white-space: pre-line;
+}
+
+.dark .text {
+  color: #ffffff;
+}
+
+.dark .image {
+  height: 64px;
+  width: 165px;
+}
+
+@media (max-width: 640px) {
+  .logo {
+    min-width: auto;
+  }
+
+  .image {
+    height: 42px;
+    width: 103px;
+  }
+
+  .mark {
+    height: 34px;
+    width: 24px;
+  }
+
+  .text {
+    font-size: 13px;
+  }
+}

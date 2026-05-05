@@ -1,0 +1,37 @@
+.breadcrumb {
+  align-items: center;
+  color: #00446d;
+  display: flex;
+  font-size: 14px;
+  gap: 15px;
+  line-height: 22px;
+  margin-bottom: 28px;
+}
+
+.breadcrumb a,
+.breadcrumb button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.breadcrumb a:hover,
+.breadcrumb button:hover {
+  color: #003259;
+}
+
+.breadcrumb strong {
+  color: #666666;
+  font-weight: 400;
+}
+
+.crumbWrapper {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}

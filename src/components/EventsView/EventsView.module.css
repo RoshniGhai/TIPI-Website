@@ -1,0 +1,409 @@
+.page {
+  animation: pageEnter 240ms ease both;
+  background: #fdfdfd;
+  margin: 0 auto 120px;
+  max-width: var(--content-width);
+  padding-top: 32px;
+  width: min(var(--content-width), calc(100% - 128px));
+}
+
+.breadcrumb {
+  align-items: center;
+  color: #00446d;
+  display: flex;
+  font-size: 14px;
+  gap: 15px;
+  line-height: 22px;
+  margin-bottom: 72px;
+}
+
+.breadcrumb strong {
+  color: #666666;
+  font-weight: 400;
+}
+
+.featured {
+  animation: cardEnter 260ms ease both;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 643px minmax(0, 1fr);
+}
+
+.featured img {
+  border-radius: 8px;
+  height: 270px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.featuredCopy,
+.eventCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featuredCopy {
+  justify-content: flex-end;
+}
+
+.featured h1,
+.eventCopy h3,
+.dateLabel {
+  color: #003259;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+  margin: 0;
+}
+
+.featured h1 {
+  color: #444444;
+}
+
+.meta {
+  align-items: center;
+  color: #00446d;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  gap: 32px;
+  line-height: 24px;
+}
+
+.meta span {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
+}
+
+.featured p,
+.eventCopy p {
+  color: #4f4f4f;
+  display: -webkit-box;
+  font-size: 16px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 24px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.featuredActions,
+.eventActions {
+  align-items: center;
+  display: flex;
+  gap: 48px;
+}
+
+.featuredActions button,
+.notifyButton {
+  border-radius: 8px;
+  font-size: 16px;
+  min-width: 160px;
+  padding: 8px 40px;
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.featuredActions button {
+  background: #003259;
+  color: #ffffff;
+}
+
+.notifyButton {
+  background: #ffffff;
+  border: 1px solid #003259;
+  color: #003259;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.featuredActions button:hover,
+.featuredActions button:focus-visible,
+.notifyButton:hover,
+.notifyButton:focus-visible {
+  box-shadow: 0 10px 20px rgba(0, 50, 89, 0.14);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.notifyButton:hover,
+.notifyButton:focus-visible {
+  background: #003259;
+  color: #ffffff;
+}
+
+.viewMore {
+  align-items: center;
+  color: #0c6490;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 8px;
+  line-height: 28px;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.viewMore span {
+  align-items: center;
+  border: 0.5px solid #0c6490;
+  border-radius: 999px;
+  display: inline-flex;
+  height: 27px;
+  justify-content: center;
+  width: 27px;
+}
+
+.viewMore:hover,
+.viewMore:focus-visible {
+  color: #003259;
+  outline: none;
+  transform: translateX(2px);
+}
+
+.listSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 72px;
+}
+
+.tabs {
+  align-items: center;
+  display: flex;
+  gap: 48px;
+}
+
+.tabs button {
+  background: transparent;
+  color: #6c6c6c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  line-height: 36px;
+  padding: 0 0 8px;
+  position: relative;
+  transition: color 180ms ease;
+}
+
+.tabs button:hover,
+.tabs button:focus-visible {
+  color: #003259;
+  outline: none;
+}
+
+.activeTab {
+  color: #001e40 !important;
+}
+
+.activeTab::after {
+  background: #006689;
+  border-radius: 12px;
+  bottom: 0;
+  content: '';
+  height: 4px;
+  left: 0;
+  position: absolute;
+  width: 96px;
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.emptyState {
+  background: #f4fbff;
+  border: 1px solid rgba(0, 112, 181, 0.18);
+  border-radius: 8px;
+  color: #003259;
+  font-size: 18px;
+  line-height: 28px;
+  margin-top: 32px;
+  padding: 24px;
+}
+
+.eventRow {
+  animation: cardEnter 260ms ease both;
+  animation-delay: var(--enter-delay);
+  cursor: pointer;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: auto 2px 320px minmax(0, 1fr);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.eventRow:hover,
+.eventRow:focus-within,
+.eventRow:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 16px 32px rgba(0, 50, 89, 0.1);
+  outline: none;
+  transform: translateY(-3px);
+}
+
+.pastEvent {
+  opacity: 0.6;
+  filter: grayscale(100%);
+}
+
+.dateLabel {
+  align-self: start;
+  color: #003259;
+  white-space: nowrap;
+}
+
+.timeline {
+  background: #0070b5;
+  min-height: 200px;
+}
+
+.eventImage {
+  align-self: stretch;
+  aspect-ratio: 320 / 200;
+  border-radius: 8px;
+  height: 200px;
+  object-fit: cover;
+  width: 320px;
+}
+
+.eventCopy {
+  justify-content: flex-end;
+}
+
+.eventCopy p {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.pagination button,
+.pagination span {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 8px;
+  color: #444444;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 600;
+  height: 32px;
+  justify-content: center;
+  min-width: 32px;
+  padding: 0 10px;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.pagination span {
+  border-color: transparent;
+}
+
+.pagination button:hover,
+.pagination button:focus-visible {
+  background: #eef8ff;
+  color: #003259;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.currentPage {
+  background: #003259 !important;
+  color: #ffffff !important;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1040px) {
+  .page {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+  }
+
+  .featured,
+  .eventRow {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    display: none;
+  }
+
+  .eventImage {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    margin-bottom: 76px;
+    padding-top: 24px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 40px;
+  }
+
+  .featured h1,
+  .eventCopy h3,
+  .dateLabel {
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  .featuredActions,
+  .eventActions,
+  .tabs,
+  .meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .featuredActions button,
+  .notifyButton {
+    width: 100%;
+  }
+}
