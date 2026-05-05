@@ -16,6 +16,11 @@ function getInsightExcerpt(insight) {
   return insight.excerpt || insight.content || '';
 }
 
+function useFallbackImage(event, fallback) {
+  if (event.currentTarget.src.endsWith(fallback)) return;
+  event.currentTarget.src = fallback;
+}
+
 export function InsightsSection({ insights }) {
   const [featured, ...cards] = insights;
   const navigate = useNavigate();
@@ -43,7 +48,11 @@ export function InsightsSection({ insights }) {
         role="link"
         tabIndex={0}
       >
-        <img src={featured.image || '/figma-assets/detail-hero.png'} alt="" />
+        <img
+          src={featured.image || '/figma-assets/detail-hero.png'}
+          alt=""
+          onError={(event) => useFallbackImage(event, '/figma-assets/detail-hero.png')}
+        />
         <div className={styles.featuredCopy}>
           <h3>{featured.title}</h3>
           <div className={styles.tags} aria-label="Insight tags">
@@ -66,7 +75,11 @@ export function InsightsSection({ insights }) {
             role="link"
             tabIndex={0}
           >
-            <img src={insight.image || '/figma-assets/detail-similar-1.png'} alt="" />
+            <img
+              src={insight.image || '/figma-assets/detail-similar-1.png'}
+              alt=""
+              onError={(event) => useFallbackImage(event, '/figma-assets/detail-similar-1.png')}
+            />
             <h3>{insight.title}</h3>
             <div className={styles.tags}>
               {getInsightTags(insight).slice(0, 3).map((tag) => (
