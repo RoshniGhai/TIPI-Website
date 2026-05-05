@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box, ChevronDown, Landmark, Lightbulb, Menu } from 'lucide-react';
+import { Box, ChevronDown, Landmark, Lightbulb, Menu, X } from 'lucide-react';
 import { Logo } from '../Logo/Logo.jsx';
 import styles from './Header.module.css';
 
@@ -26,18 +26,59 @@ const verticalMenuItems = [
 
 export function Header({ logo, navItems, cta, activeView = 'home', onVerticalSelect, onNavSelect, onSubscribe }) {
   const [isVerticalMenuOpen, setIsVerticalMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileVerticalOpen, setIsMobileVerticalOpen] = useState(false);
   const verticalMenuRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+
+  const closeMenus = () => {
+    setIsVerticalMenuOpen(false);
+    setIsMobileMenuOpen(false);
+    setIsMobileVerticalOpen(false);
+  };
+
+  const getTargetView = (label) => {
+    if (label === 'Insights') return 'insights';
+    if (label === 'Events') return 'events';
+    if (label === 'People') return 'people';
+    if (label === 'Contact Us') return 'contact';
+    if (label === 'About Us') return 'about';
+    return null;
+  };
+
+  const handleNavItemClick = (event, item) => {
+    const targetView = getTargetView(item.label);
+    if (!targetView) return;
+    event.preventDefault();
+    closeMenus();
+    onNavSelect?.(targetView);
+  };
+
+  const handleVerticalClick = (event, label) => {
+    closeMenus();
+    if (label === 'Opportunity') {
+      event.preventDefault();
+      onVerticalSelect?.('opportunity');
+    }
+  };
 
   useEffect(() => {
     function closeOnOutsideClick(event) {
-      if (verticalMenuRef.current && !verticalMenuRef.current.contains(event.target)) {
+      if (
+        verticalMenuRef.current &&
+        !verticalMenuRef.current.contains(event.target) &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
         setIsVerticalMenuOpen(false);
+        setIsMobileMenuOpen(false);
+        setIsMobileVerticalOpen(false);
       }
     }
 
     function closeOnEscape(event) {
       if (event.key === 'Escape') {
-        setIsVerticalMenuOpen(false);
+        closeMenus();
       }
     }
 
@@ -49,6 +90,13 @@ export function Header({ logo, navItems, cta, activeView = 'home', onVerticalSel
       document.removeEventListener('keydown', closeOnEscape);
     };
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <header className={styles.header}>
@@ -88,11 +136,7 @@ export function Header({ logo, navItems, cta, activeView = 'home', onVerticalSel
                       href={href}
                       role="menuitem"
                       onClick={(event) => {
-                        setIsVerticalMenuOpen(false);
-                        if (label === 'Opportunity') {
-                          event.preventDefault();
-                          onVerticalSelect?.('opportunity');
-                        }
+                        handleVerticalClick(event, label);
                       }}
                     >
                       <span className={styles.verticalMenuIcon} aria-hidden="true">
@@ -130,19 +174,7 @@ export function Header({ logo, navItems, cta, activeView = 'home', onVerticalSel
                     item.label === 'People' ||
                     item.label === 'Contact Us'
                   ) {
-                    event.preventDefault();
-                    setIsVerticalMenuOpen(false);
-                    const targetView =
-                      item.label === 'Insights'
-                        ? 'insights'
-                        : item.label === 'Events'
-                          ? 'events'
-                          : item.label === 'People'
-                            ? 'people'
-                            : item.label === 'Contact Us'
-                              ? 'contact'
-                              : 'about';
-                    onNavSelect?.(targetView);
+                    handleNavItemClick(event, item);
                   }
                 }}
               >
@@ -156,15 +188,99 @@ export function Header({ logo, navItems, cta, activeView = 'home', onVerticalSel
           href={cta.href}
           onClick={(event) => {
             event.preventDefault();
-            setIsVerticalMenuOpen(false);
+            closeMenus();
             onSubscribe?.();
           }}
         >
           {cta.label}
         </a>
-        <button className={styles.menuButton} aria-label="Open navigation menu">
-          <Menu size={22} />
+        <button
+          className={styles.menuButton}
+          aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
+          type="button"
+          onClick={() => {
+            setIsVerticalMenuOpen(false);
+            setIsMobileMenuOpen((isOpen) => !isOpen);
+          }}
+        >
+          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
+      </div>
+      <div className={`${styles.mobileScrim} ${isMobileMenuOpen ? styles.mobileScrimOpen : ''}`} />
+      <div
+        className={`${styles.mobilePanel} ${isMobileMenuOpen ? styles.mobilePanelOpen : ''}`}
+        id="mobile-navigation"
+        ref={mobileMenuRef}
+      >
+        <nav className={styles.mobileNav} aria-label="Mobile navigation">
+          {navItems.map((item) =>
+            item.hasDropdown ? (
+              <div className={styles.mobileGroup} key={item.label}>
+                <button
+                  className={styles.mobileLink}
+                  type="button"
+                  aria-expanded={isMobileVerticalOpen}
+                  onClick={() => setIsMobileVerticalOpen((isOpen) => !isOpen)}
+                >
+                  {item.label}
+                  <ChevronDown
+                    className={isMobileVerticalOpen ? styles.chevronOpen : undefined}
+                    size={18}
+                  />
+                </button>
+                <div className={`${styles.mobileSubmenu} ${isMobileVerticalOpen ? styles.mobileSubmenuOpen : ''}`}>
+                  {verticalMenuItems.map(({ label, description, href, Icon }) => (
+                    <a
+                      className={styles.mobileVerticalItem}
+                      href={href}
+                      key={label}
+                      onClick={(event) => handleVerticalClick(event, label)}
+                    >
+                      <Icon size={20} />
+                      <span>
+                        <strong>{label}</strong>
+                        <small>{description}</small>
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a
+                className={`${styles.mobileLink} ${
+                  ((activeView === 'insights' || activeView === 'insightDetail') &&
+                    item.label === 'Insights') ||
+                  ((activeView === 'events' || activeView === 'eventDetail') &&
+                    item.label === 'Events') ||
+                  (activeView === 'about' && item.label === 'About Us') ||
+                  ((activeView === 'people' || activeView === 'personDetail') &&
+                    item.label === 'People') ||
+                  (activeView === 'contact' && item.label === 'Contact Us')
+                    ? styles.mobileLinkActive
+                    : ''
+                }`}
+                href={item.href}
+                key={item.label}
+                onClick={(event) => handleNavItemClick(event, item)}
+              >
+                {item.label}
+              </a>
+            ),
+          )}
+        </nav>
+        <a
+          className={styles.mobileSubscribe}
+          href={cta.href}
+          onClick={(event) => {
+            event.preventDefault();
+            closeMenus();
+            onSubscribe?.();
+          }}
+        >
+          {cta.label}
+        </a>
       </div>
     </header>
   );
