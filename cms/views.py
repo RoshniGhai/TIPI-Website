@@ -3,6 +3,7 @@ import mimetypes
 import uuid
 
 import bleach
+import cloudinary.uploader
 from django.conf import settings
 from django.db import transaction
 from django.db.models import F
@@ -81,6 +82,15 @@ def author_for_user(user):
 def save_cms_data_url(data_url, folder='cms'):
     if not data_url or not isinstance(data_url, str) or ';base64,' not in data_url:
         return ''
+    if cloudinary.config().cloud_name:
+        upload = cloudinary.uploader.upload(
+            data_url,
+            folder=f'tipi/{folder}'.strip('/'),
+            resource_type='auto',
+            overwrite=False,
+        )
+        return upload.get('secure_url') or upload.get('url') or ''
+
     header, encoded = data_url.split(';base64,', 1)
     mime_type = header.replace('data:', '')
     extension = mimetypes.guess_extension(mime_type) or '.bin'
@@ -96,6 +106,10 @@ def save_or_keep_media_url(value, folder='cms'):
     if value and isinstance(value, str) and ';base64,' in value:
         return save_cms_data_url(value, folder)
     return value or ''
+
+
+def save_or_keep_image_url(value, folder='cms'):
+    return save_or_keep_media_url(value, folder)
 
 
 ALLOWED_RICH_TEXT_TAGS = [
@@ -537,12 +551,13 @@ class CmsEventCollectionView(APIView):
                 position=int(schedule.get('position') or index),
             )
         if speaker_name:
+            saved_speaker_image = save_or_keep_image_url(speaker_image, 'cms/speakers')
             speaker, _ = Speaker.objects.update_or_create(
                 name=speaker_name,
                 defaults={
                     'designation': speaker_designation,
                     'company': speaker_company,
-                    'image_url': speaker_image,
+                    'image_url': saved_speaker_image,
                 },
             )
             EventSpeaker.objects.update_or_create(
@@ -595,7 +610,9 @@ class CmsAuthorCollectionView(APIView):
         return Response(CmsAuthorSerializer(Author.objects.all(), many=True).data)
 
     def post(self, request):
-        serializer = CmsAuthorSerializer(data=request.data)
+        data = request.data.copy()
+        data['image_url'] = save_or_keep_image_url(data.get('image_url'), 'cms/authors')
+        serializer = CmsAuthorSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         author = serializer.save()
         return Response(CmsAuthorSerializer(author).data, status=status.HTTP_201_CREATED)
@@ -610,6 +627,7 @@ class CmsSpeakerCollectionView(APIView):
     def post(self, request):
         data = request.data.copy()
         sanitize_content_fields(data, ['bio'])
+        data['image_url'] = save_or_keep_image_url(data.get('image_url'), 'cms/speakers')
         serializer = CmsSpeakerSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         speaker = serializer.save()
@@ -659,7 +677,9 @@ class CmsBannerCollectionView(APIView):
         return Response(CmsBannerSerializer(Banner.objects.all().order_by('order', '-updated_at'), many=True).data)
 
     def post(self, request):
-        serializer = CmsBannerSerializer(data=request.data)
+        data = request.data.copy()
+        data['image_url'] = save_or_keep_image_url(data.get('image_url'), 'cms/banners')
+        serializer = CmsBannerSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         instance = serializer.save()
         return Response(CmsBannerSerializer(instance).data, status=status.HTTP_201_CREATED)

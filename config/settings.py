@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+import cloudinary
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR.parent / '.env')
@@ -17,6 +18,16 @@ ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,.up.railwa
 railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
 if railway_domain and railway_domain not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(railway_domain)
+
+if os.environ.get('CLOUDINARY_URL'):
+    cloudinary.config(secure=True)
+else:
+    cloudinary.config(
+        cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+        api_key=os.environ.get('CLOUDINARY_API_KEY'),
+        api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+        secure=True,
+    )
 
 INSTALLED_APPS = [
     'django.contrib.admin',
